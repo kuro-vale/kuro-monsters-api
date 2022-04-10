@@ -1,8 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Tokens\TokenController;
+use App\Http\Controllers\Tokens\LogoutController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Auth Routes
+
+Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);
+// Show user tokens
+Route::get('/tokens', [TokenController::class, 'show'])->middleware('auth:sanctum');
+// Delete current access token
+Route::delete('/logout', [LogoutController::class, 'logout'])->middleware('auth:sanctum');
