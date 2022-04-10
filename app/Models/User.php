@@ -30,4 +30,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function monsters()
+    {
+        return $this->hasMany(Monster::class);
+    }
 }
