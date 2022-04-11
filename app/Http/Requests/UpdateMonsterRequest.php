@@ -30,8 +30,8 @@ class UpdateMonsterRequest extends FormRequest
         $favorite_color = ['black', 'white', 'red', 'yellow', 'blue', 'orange', 'green', 'purple'];
 
         return [
-            'name' => ['required', 'alpha', 'max:25'],
-            'favorite_color' => ['nullable', Rule::in_array($favorite_color)]
+            'name' => ['required', 'regex:/^[a-zA-Z\s-]*$/', 'max:25'],
+            'favorite_color' => ['nullable', Rule::in($favorite_color)]
         ];
     }
 }

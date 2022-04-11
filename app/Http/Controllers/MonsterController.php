@@ -9,6 +9,7 @@ use App\Http\Resources\MonsterResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class MonsterController extends Controller
 {
@@ -25,10 +26,10 @@ class MonsterController extends Controller
             {
                 return $q->where('username', 'like', '%' . $request->get('username') . '%'); // Where monster->user->username like ?username=
             });
-        })->paginate(5)->appends([
+        })->where('dead', '!=', 1)->paginate(5)->appends([
             'username' => $request->get('username')
         ]);
-        if (!$monsters['data'])
+        if (count($monsters) == 0)
         {
             return response()->json([], Response::HTTP_NO_CONTENT);
         }
@@ -44,7 +45,11 @@ class MonsterController extends Controller
      */
     public function store(StoreMonsterRequest $request)
     {
-        //
+        $monster = Monster::create([
+            'user_id' => Auth::id(),
+        ] + $request->all());
+
+        return new MonsterResource($monster);
     }
 
     /**

@@ -15,6 +15,7 @@ class Monster extends Model
         'race',
         'size',
         'favorite_color',
+        'user_id',
     ];
 
     public function user()

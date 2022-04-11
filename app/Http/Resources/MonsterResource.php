@@ -15,12 +15,8 @@ class MonsterResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
-            'life' => $this->life,
-            'hunger' => $this->hunger,
-            'energy' => $this->energy,
-            'sleeping' => boolval($this->sleeping),
-            'dead' => boolval($this->dead),
             'gender' => $this->gender,
             'race' => $this->race,
             'size' => $this->size,

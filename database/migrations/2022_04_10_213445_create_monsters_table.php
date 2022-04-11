@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('monsters', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained('users');
+            $table->foreignIdFor(User::class)->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->set('gender', ['male', 'female', 'non-binary']);
             $table->set('race', ['aberration', 'beast', 'dragon', 'elemental', 'undead', 'vampire', 'werewolf']);

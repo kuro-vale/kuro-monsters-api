@@ -30,11 +30,11 @@ class StoreMonsterRequest extends FormRequest
         $favorite_color = ['black', 'white', 'red', 'yellow', 'blue', 'orange', 'green', 'purple'];
 
         return [
-            'name' => ['required', 'alpha', 'max:25'],
-            'gender' => ['required', Rule::in_array($gender)],
-            'race' => ['required', Rule::in_array($race)],
-            'size' => ['required', Rule::in_array($size)],
-            'favorite_color' => ['nullable', Rule::in_array($favorite_color)],
+            'name' => ['required', 'regex:/^[a-zA-Z\s-]*$/', 'max:25'],
+            'gender' => ['required', Rule::in($gender)],
+            'race' => ['required', Rule::in($race)],
+            'size' => ['required', Rule::in($size)],
+            'favorite_color' => ['nullable', Rule::in($favorite_color)],
         ];
     }
 }
