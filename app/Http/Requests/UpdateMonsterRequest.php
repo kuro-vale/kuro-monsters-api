@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Monster;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,9 +14,7 @@ class UpdateMonsterRequest extends FormRequest
      */
     public function authorize()
     {
-        $monster = Monster::find($this->route('monster'));
-
-        return $this->user()->can('update', $monster);
+        return true;
     }
 
     /**

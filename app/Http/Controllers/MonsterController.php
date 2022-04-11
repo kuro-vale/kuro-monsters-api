@@ -81,7 +81,14 @@ class MonsterController extends Controller
      */
     public function update(UpdateMonsterRequest $request, Monster $monster)
     {
-        //
+        $this->authorize('update', $monster);
+
+        $monster->update([
+            'name' => $request->name,
+            'favorite_color' => $request->favorite_color,
+        ]);
+
+        return new MonsterResource($monster);
     }
 
     /**
