@@ -31,7 +31,7 @@ class MonsterController extends Controller
         ]);
         if (count($monsters) == 0)
         {
-            return response()->json([], Response::HTTP_NO_CONTENT);
+            return response()->json(null, Response::HTTP_NO_CONTENT);
         }
 
         return MonsterResource::collection($monsters);
@@ -60,7 +60,16 @@ class MonsterController extends Controller
      */
     public function show(Monster $monster)
     {
-        //
+        return response()->json([
+            'data' => new MonsterResource($monster),
+            'status' => [
+                'life' => $monster->life,
+                'hunger' => $monster->hunger,
+                'energy' => $monster->energy,
+                'sleeping' => boolval($monster->sleeping),
+                'dead' => boolval($monster->dead),
+            ]
+        ]);
     }
 
     /**
