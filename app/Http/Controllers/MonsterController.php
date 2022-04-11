@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Monster;
 use App\Http\Requests\StoreMonsterRequest;
 use App\Http\Requests\UpdateMonsterRequest;
+use App\Http\Resources\MonsterResource;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MonsterController extends Controller
 {
@@ -13,9 +17,23 @@ class MonsterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $monsters = Monster::latest()->when($request->has('username'), function (Builder $query) use ($request) // Search monsters by ?username=
+        {
+            return $query->whereHas('user', function (Builder $q) use ($request) // Where Monster::Has(User::class)
+            {
+                return $q->where('username', 'like', '%' . $request->get('username') . '%'); // Where monster->user->username like ?username=
+            });
+        })->paginate(5)->appends([
+            'username' => $request->get('username')
+        ]);
+        if (!$monsters['data'])
+        {
+            return response()->json([], Response::HTTP_NO_CONTENT);
+        }
+
+        return MonsterResource::collection($monsters);
     }
 
     /**

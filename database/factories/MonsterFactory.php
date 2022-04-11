@@ -22,10 +22,11 @@ class MonsterFactory extends Factory
         $favorite_color = ['black', 'white', 'red', 'yellow', 'blue', 'orange', 'green', 'purple'];
         return [
             'name' => $this->faker->name(),
-            'gender' => array_rand($gender),
-            'race' => array_rand($race),
-            'size' => array_rand($size),
-            'favorite_color' => array_rand($favorite_color),
+            'gender' => $gender[array_rand($gender)],
+            'race' => $race[array_rand($race)],
+            'size' => $size[array_rand($size)],
+            'favorite_color' => $favorite_color[array_rand($favorite_color)],
+            'user_id' => 1
         ];
     }
 }
