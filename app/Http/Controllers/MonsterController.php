@@ -99,7 +99,11 @@ class MonsterController extends Controller
      */
     public function destroy(Monster $monster)
     {
-        //
+        $this->authorize('delete', $monster);
+
+        $monster->delete();
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
     public function __construct()
