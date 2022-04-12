@@ -24,7 +24,7 @@ return new class extends Migration
             $table->set('size', ['small', 'medium', 'large']);
             $table->set('favorite_color', ['black', 'white', 'red', 'yellow', 'blue', 'orange', 'green', 'purple'])->nullable();
             $table->integer('life')->default(100);
-            $table->integer('hunger')->default(100);
+            $table->integer('hunger')->default(0);
             $table->integer('energy')->default(100);
             $table->boolean('sleeping')->default(false);
             $table->boolean('dead')->default(false);
