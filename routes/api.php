@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MonsterController;
-use App\Http\Controllers\MonsterStatsController;
+use App\Http\Controllers\MonsterStatusController;
 use App\Http\Controllers\Tokens\TokenController;
 use App\Http\Controllers\Tokens\LogoutController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +20,6 @@ Route::delete('/logout', [LogoutController::class, 'logout'])->middleware('auth:
 // Monsters Routes
 
 Route::apiResource('/monsters', MonsterController::class);
-// Monsters' stats Routes
-Route::get('/monsters/{monster}/status', [MonsterStatsController::class, 'show']);
-Route::patch('/monsters/{monster}/status', [MonsterStatsController::class, 'update'])->middleware('auth:sanctum');
+// Monster status Routes
+Route::get('/monsters/{monster}/status', [MonsterStatusController::class, 'show']);
+Route::patch('/monsters/{monster}/status', [MonsterStatusController::class, 'update'])->middleware('auth:sanctum');

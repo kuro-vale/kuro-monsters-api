@@ -9,7 +9,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class MonsterStatsController extends Controller
+class MonsterStatusController extends Controller
 {
     public function show(Monster $monster)
     {
@@ -72,11 +72,6 @@ class MonsterStatsController extends Controller
         elseif ($request->has('sleep'))
         {
             $monster->sleeping = true;
-            $monster->save();
-        }
-        elseif ($request->has('wake_up'))
-        {
-            $monster->sleeping = false;
             $monster->save();
         }
 
