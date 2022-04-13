@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
             ]);
 
             // Increase Monsters' hunger
-            Monster::where('hunger', '<', 100)->increment('hunger', 10);
+            Monster::where('hunger', '<', 100)->increment('hunger', 1);
 
             // Decrease Monsters' life if hunger is at 100
             Monster::where('hunger', '=', 100)->where('life', '>', 0)->decrement('life', 10);
@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
                 'sleeping' => 1,
                 'energy' => 0,
             ]);
-        })->everyTenMinutes();
+        });
     }
 
     /**

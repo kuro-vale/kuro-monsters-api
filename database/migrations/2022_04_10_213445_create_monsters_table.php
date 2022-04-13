@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('energy')->default(100);
             $table->boolean('sleeping')->default(false);
             $table->boolean('dead')->default(false);
+            $table->timestamp('fed_at')->nullable()->useCurrent();
             $table->timestamps();
         });
     }
