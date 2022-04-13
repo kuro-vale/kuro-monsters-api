@@ -16,16 +16,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Reduce Monsters' energy every 2 minutes
         $schedule->call(function ()
         {
-            Monster::where('sleeping', '=', 0)->decrement('energy', 1);
-        })->everyTwoMinutes();
+            // Reduce Monsters' energy
+            Monster::where('sleeping', '=', 0)->decrement('energy', 5);
 
-        $schedule->call(function ()
-        {
-            // Increase sleeping Monsters' energy every minute.
-            Monster::where('sleeping', '=', 1)->where('dead', '=', 0)->increment('energy', 1);
+            // Increase sleeping Monsters' energy
+            Monster::where('sleeping', '=', 1)->where('dead', '=', 0)->increment('energy', 10);
 
             // Put to sleep tired monsters
             Monster::where('energy', '=', 0)->update([
@@ -33,23 +30,24 @@ class Kernel extends ConsoleKernel
             ]);
 
             // Awaken sleeping monsters
-            Monster::where('energy', '=', 100)->update([
-                'sleeping' => 0
+            Monster::where('energy', '>=', 100)->update([
+                'sleeping' => 0,
+                'energy' => 100,
             ]);
 
-            // Increase Monsters' hunger every minute
-            Monster::where('hunger', '<', 100)->increment('hunger', 1);
+            // Increase Monsters' hunger
+            Monster::where('hunger', '<', 100)->increment('hunger', 10);
 
             // Decrease Monsters' life if hunger is at 100
-            Monster::where('hunger', '=', 100)->where('life', '>', 0)->decrement('life', 1);
+            Monster::where('hunger', '=', 100)->where('life', '>', 0)->decrement('life', 10);
 
             // Kill starving monsters
-            Monster::where('life', '=', 0)->update([
+            Monster::where('life', '<=', 0)->update([
                 'dead' => 1,
                 'sleeping' => 1,
                 'energy' => 0,
             ]);
-        })->everyMinute();
+        })->everyTenMinutes();
     }
 
     /**
