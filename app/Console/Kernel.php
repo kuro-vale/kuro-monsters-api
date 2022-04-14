@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function ()
+        $schedule->call(function () // This happens every 10 minutes, because of limitations of Heroku
         {
             // Reduce Monsters' energy
             Monster::where('sleeping', '=', 0)->decrement('energy', 5);
