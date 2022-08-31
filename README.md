@@ -11,11 +11,11 @@ When hunger is at 100 they start to lose their life by 10 every 10 minutes, when
 
 If monster lost all their energy they have to rest until they restore all their energy, meanwhile, you cannot feed them.
 
-### Host and Bearer Token Variables
+## Docker image
 
-You can run this API with the host 
-https://kuro-monsters-api.herokuapp.com
-Or if you prefer you can run it on your local machine 127.0.0.1:8000
+You can run this project with a [docker image](https://hub.docker.com/repository/docker/kurovale/kuro-monsters)
+
+### Host and Bearer Token Variables
 
 Most of the requests need a Bearer Token, you can create one with the Register request.
 
