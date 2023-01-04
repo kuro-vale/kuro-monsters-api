@@ -13,7 +13,7 @@ If monster lost all their energy they have to rest until they restore all their 
 
 ## Docker image
 
-You can run this project with a [docker image](https://hub.docker.com/repository/docker/kurovale/kuro-monsters)
+You can run this project with a [docker image](https://hub.docker.com/r/kurovale/kuro-monsters)
 
 ### Host and Bearer Token Variables
 
